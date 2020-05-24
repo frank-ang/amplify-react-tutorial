@@ -48,6 +48,19 @@ New tasks created from local will appear in DynamoDB!
 1. Add Auth.
 ```
 amplify add auth
+amplify push
+```
+
+2. Create login UI
+Edit *src/App.js* (see tutorial)
+```npm start```
+create new user (check spam folder for auth code from verificationemail.com)
+
+## 4. Deploy and host app
+
+1. Add Hosting.
+```
+amplify add hosting
 ```
 
 
