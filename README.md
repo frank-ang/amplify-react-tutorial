@@ -26,12 +26,29 @@ Edit *src/index.js*, add amplify libraries.
 
 ## 2. Add GraphQL API
 
-Add a GraphQL API, Follow the prompts. Push to backend.
+1. Add API for GraphQL. Follow the prompts. Push to backend.
 ```
 amplify add api
 amplify push
+amplify status
 ```
 
+2. local mock testing
+```
+amplify mock api
+```
+
+3. Edit App.js to connect frontend to API
+Edit *App.js* (see tutorial for code)
+```npm start```
+New tasks created from local will appear in DynamoDB!
+
+## 3. Add Authentication
+
+1. Add Auth.
+```
+amplify add auth
+```
 
 
 
