@@ -1,3 +1,41 @@
+# My Notes
+
+This project is from amplify getting started React tutorial
+https://docs.amplify.aws/start/q/integration/react
+
+## 1. setup project
+
+1. create React project
+```
+npx create-react-app amplify02
+cd amplify02
+npm start
+```
+2. init Amplify backend.
+```
+amplify init
+```
+3. setup frontend
+
+Install Amplify libraries 
+```
+npm install aws-amplify @aws-amplify/ui-react
+```
+
+Edit *src/index.js*, add amplify libraries.
+
+## 2. Add GraphQL API
+
+Add a GraphQL API, Follow the prompts. Push to backend.
+```
+amplify add api
+amplify push
+```
+
+
+
+
+# Auto generated notes below
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -66,3 +104,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
