@@ -59,12 +59,29 @@ create new user (check spam folder for auth code from verificationemail.com)
 ## 4. Deploy and host app
 
 1. Add Hosting.
+
 ```
 amplify add hosting
 ```
+
 select:
 > *Managed hosting with custom domains, Continuous deployment*
 >  -> *Manual deployment*
 
-2. 
+```
+amplify publish
+```
+
+The hosted website should now be online.
+
+## 5. Scale the app with navigation.
+
+
+
+## 6. Add storage. (do this later, after app navigation)
+
+1. add storage
+```
+amplify add storage
+```
 
