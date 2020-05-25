@@ -76,7 +76,13 @@ The hosted website should now be online.
 
 ## 5. Scale the app with navigation.
 
+1. Install react bootstrap and router
+```
+npm install react-router-dom
+npm install react-bootstrap bootstrap
+```
 
+2. Refactor app, add components.
 
 ## 6. Add storage. (do this later, after app navigation)
 
