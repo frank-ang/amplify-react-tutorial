@@ -8,7 +8,7 @@ class Menubar extends React.Component {
     constructor(props) {
         super(props);
         this.state = { username: "" };
-        Auth.currentAuthenticatedUser()
+        Auth.currentAuthenticatedUser({bypassCache: false})
             .then(user => { 
                 console.log(user);
                 this.setState({ "username": user.username});
@@ -17,27 +17,26 @@ class Menubar extends React.Component {
     }
 
     render () {
-   
         return (
-        <div>
-            <Navbar bg="dark" variant="dark" expand="lg" sticky="top" fixed="top" >
-                <Navbar.Brand href="#home">Amplify it!</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/todos">Todos</Nav.Link>
-                    <NavDropdown title="AWSome features" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="/upload">Upload to S3</NavDropdown.Item>
-                    </NavDropdown>
-                    </Nav>
-                    <Nav>
-                        <Nav.Item><Navbar.Text>Hello, {this.state.username} &nbsp;&nbsp;</Navbar.Text></Nav.Item>
-                        <Nav.Item><AmplifySignOut/></Nav.Item>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
-        </div>
+            <div>
+                <Navbar bg="dark" variant="dark" expand="lg" sticky="top" fixed="top" >
+                    <Navbar.Brand href="#home">Amplify it!</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="mr-auto">
+                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/todos">Todos</Nav.Link>
+                        <NavDropdown title="More features" id="basic-nav-dropdown">
+                            <NavDropdown.Item href="/upload">Upload to S3</NavDropdown.Item>
+                        </NavDropdown>
+                        </Nav>
+                        <Nav>
+                            <Nav.Item><Navbar.Text>Hello, {this.state.username} &nbsp;&nbsp;</Navbar.Text></Nav.Item>
+                            <Nav.Item><AmplifySignOut/></Nav.Item>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            </div>
         );
     }
 }

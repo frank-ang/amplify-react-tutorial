@@ -74,7 +74,9 @@ amplify publish
 
 The hosted website should now be online.
 
-## 5. Scale the app with navigation.
+## 5. Implement app restructuring.
+
+Restructure the app with navigation and router into sub-components.
 
 1. Install react bootstrap and router
 ```
@@ -82,12 +84,42 @@ npm install react-router-dom
 npm install react-bootstrap bootstrap
 ```
 
-2. Refactor app, add components.
+2. Refactor pages:
+    1. *src/App.js*: implement router
+    2. *src/components/Menubar.js* implement menubar
+    3. *src/components/*.js* implement individual pages
 
-## 6. Add storage. (do this later, after app navigation)
+3. Publish website to Amplify hosting
+```
+amplify publish
+```
+
+4. Setup Rewrites in Amplify hosting
+
+*Amplify Console -> App settings -> Rewrites and redirects*
+
+Add the following rules to fix react-router hosting:
+
+>Source address: 
+```</^((?!.(xml|css|gif|ico|jpg|js|png|txt|svg|woff|ttf)$).)*$/>```
+>Target address: ```/index.html```
+>Type: ```200 (Rewrite)```
+
+>Source address: 
+```/<*>```
+>Target address: ```/index.html```
+>Type: ```404 (Rewrite)```	
+
+>>TODO: need an explanation of the reason for these rules.
+
+## 6. Add storage. 
 
 1. add storage
 ```
 amplify add storage
+amplify push
 ```
 
+2. implement *src/components/Upload.js*
+
+Uploads will now appear in the S3 bucket.

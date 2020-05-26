@@ -32,5 +32,10 @@
 			"type": "manual"
 		}
 	},
-	"storage": {}
+	"storage": {
+		"storage": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
+	}
 }

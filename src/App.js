@@ -15,8 +15,8 @@ import {
 
 const Footer = () => {
   return (
-      <footer class="footer text-light text-center bg-dark">
-        You are most welcome!
+      <footer class="fixed-bottom footer text-center text-muted bg-dark">
+        © 2020 Amazon Web Services ASEAN. Dedicated to Devs!
       </footer>
   )
 }
