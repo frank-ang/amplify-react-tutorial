@@ -1,6 +1,6 @@
 # My Notes
 
-This project is from amplify getting started React tutorial
+This tutorial expands on the AWS Amplify "Getting Started" tutorial for ReactJS.
 https://docs.amplify.aws/start/q/integration/react
 
 ## 1. setup project
