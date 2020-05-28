@@ -22,5 +22,23 @@
                 }
             }
         }
+    },
+    "test": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-amplify02-test-230420-authRole",
+            "UnauthRoleArn": "arn:aws:iam::450428438179:role/amplify-amplify02-test-230420-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::450428438179:role/amplify-amplify02-test-230420-authRole",
+            "Region": "ap-southeast-1",
+            "DeploymentBucketName": "amplify-amplify02-test-230420-deployment",
+            "UnauthRoleName": "amplify-amplify02-test-230420-unauthRole",
+            "StackName": "amplify-amplify02-test-230420",
+            "StackId": "arn:aws:cloudformation:ap-southeast-1:450428438179:stack/amplify-amplify02-test-230420/83772770-a0f4-11ea-aeac-02b1023f6966",
+            "AmplifyAppId": "dbvjslgovyq66"
+        },
+        "categories": {
+            "auth": {
+                "amplify02bc4fbc99": {}
+            }
+        }
     }
 }
