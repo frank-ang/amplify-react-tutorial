@@ -253,9 +253,38 @@ In this scenario, a 2nd team developer sets up a feature branch with a sandbox e
 
 # 9. Create a predictions-based feature.
 
-```
-amplify add predictions
-```
+Example based on [AWS Amplify predictions library example](https://docs.amplify.aws/lib/predictions/sample/q/platform/js)
 
+1. Setup the backend environment.
+    ```sh
+    git checkout -b prediction
+    amplify add predictions # Convert, Translate Text
+    amplify add predictions # Convert, Generate speech audio from text
+    amplify add predictions # Convert, Transcribe text from audio
+    amplify add predictions # Identify Text, select "Yes" to also identify documents.
+    amplify add predictions # Identify Entities
+    amplify add predictions # Convert, Interpret Text
+    amplify add predictions # Identify Labels
+    amplify push
+    # add the microphone module
+    yarn add microphone-stream
+    ```
+
+2. Update the app code with the example.
+    
+    See Example code in *src/components/Predict.js* , which is from the Amplify docs example.
+    
+    Fix region to where AIML services exist.
+    E.g. Speech to text is not available in ap-southeast-1 at the time of writing. 
+    Browser console debugging shows a name resolution failure. To fix
+    
+    Update regions for selective services in *src/aws-exports.js*, 
+    under JSON element *awsmobile.predictions* e.g.:
+    * Update *convert.transcription.region* to "ap-southeast-2"
+
+    Test locally. ```npm start```
+    The demo */predict* page shows demonstrations of the various prediction functions.
+    
+    > TODO: Identify Entities (Advanced) does not currently work
 
 

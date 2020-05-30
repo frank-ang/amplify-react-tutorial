@@ -1,0 +1,14 @@
+{
+    "resourceName": "speechGenerator4a64b765",
+    "convertPolicyName": "speechGeneratorPolicy4a64b765",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "convertType": "speechGenerator",
+    "language": "en-US",
+    "voice": "Salli",
+    "access": "auth"
+}
