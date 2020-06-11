@@ -2,7 +2,7 @@
 
 This walkthrough expands on the [AWS Amplify Getting Started tutorial for ReactJS](https://docs.amplify.aws/start/q/integration/react). 
 
-## 0. Verify prereqs.
+## 0. Verify developer workstation prereqs.
 
 Same prereqs as listed in the official docs. Briefly:
 * Node.js v10.x or later
@@ -14,39 +14,39 @@ Same prereqs as listed in the official docs. Briefly:
 ## 1. Initialize project
 
 1. Create a React project
-```bash
-YOUR_PROJECT_NAME=amplify02
-npx create-react-app $YOUR_PROJECT_NAME
-cd $YOUR_PROJECT_NAME
-npm start
-```
-A browser window opens to display the boilerplate React welcome message.
+    ```bash
+    YOUR_PROJECT_NAME=amplify02
+    npx create-react-app $YOUR_PROJECT_NAME
+    cd $YOUR_PROJECT_NAME
+    npm start
+    ```
+    A browser window opens to display the boilerplate React welcome message.
 
 2. Initialize Amplify backend into the project
-```bash
-amplify init
-```
-Step through the prompts.
+    ```bash
+    amplify init
+    ```
+    Step through the prompts.
 
 3. Setup frontend
 
-Install Amplify libraries.
+    Install Amplify libraries.
 
-```sh
-npm install aws-amplify @aws-amplify/ui-react
-```
+    ```sh
+    npm install aws-amplify @aws-amplify/ui-react
+    ```
 
-Add amplify libraries to the app, edit *src/index.js*
+    Add amplify libraries to the app, edit *src/index.js*
 
-```js
-import Amplify from "aws-amplify";
-import awsExports from "./aws-exports";
-Amplify.configure(awsExports);
-```
+    ```js
+    import Amplify from "aws-amplify";
+    import awsExports from "./aws-exports";
+    Amplify.configure(awsExports);
+    ```
 
 ## 2. Create a simple API and database app
 
-This is a TODO list using GraphQL and a DynamoDB table.
+This app is the example TODO list using GraphQL and the backing DynamoDB table.
 
 1. Add API for GraphQL. 
 
@@ -81,7 +81,7 @@ This is a TODO list using GraphQL and a DynamoDB table.
 
 ## 3. Deploy app to hosted website.
 
-1. Add Hosting.
+1. Add Manual deployment hosting.
 
     ```sh
     amplify add hosting
@@ -185,3 +185,108 @@ Refactor the app with navigation and react-router into sub-components.
     and React Router *src/components/Menubar.js*.
 
     Uploads will now appear in the S3 bucket.
+
+## 7. Setup Amplify Continual Deployment.
+
+1. Change frontend deployments from Amplfify manual hosting, into automated Continual Deployment from the git repo.
+    First, remove manual hosting.
+    ```sh
+    amplify remove hosting
+    amplify push
+    amplify status
+    git add .
+    git commit -m "Replace amplify manual hosting into CD"
+    git push
+    ```
+    The manually deployed hosting website is now removed. 
+
+    From the AWS Console, configure Amplify CD to deploy from your git repo. The first automated deployment kicks off, pulling the latest commit from the git repo. Verify the new CD hosted website.
+
+## 8. Team development with feature branch and a sandbox environment (Optional).
+
+In this scenario, a 2nd team developer sets up a feature branch with a sandbox environment within the same AWS Account. (Its also possible to have either shared or separate Amplify Environments and even AWS Environments)
+
+1. Clone the project code repo.
+
+    The 2nd developer can be simulated simply by using a fresh local directory. 
+    
+    Clone the repo, fork a new *experiment* code branch off from the *dev* branch.
+
+    ```sh
+    cd ..
+    mkdir amplify-react-tutorial-experiment
+    cd amplify-react-tutorial-experiment
+    git clone YOUR_GIT_REPO_URL .
+    git checkout -b dev remotes/origin/dev
+    git checkout -b experiment
+    git push --set-upstream origin experiment
+    ```
+2. Next, add the add the *experiment* Amplify environment. Try to choose the branch name same as the environment name to avoid confusion.
+
+    ```sh
+    amplify env add
+    # complete the wizard questions...
+    amplify push
+    ```
+    We now have a new Amplify backend environment, lets create the matching frontend environment.
+    From the Amplify console -> frontend, Connect to this repository branch. 
+    When the CD deployment completes, you should have a new sandbox frontend and backend. 
+
+    > Tips:
+    > Switch branches by running _both_ ```git checkout BRANCH_NAME``` _and_ ```amplify env checkout ENV_NAME``` 
+    > Pull other team-member changes by running _both_ ```git pull``` _and_ ```amplify pull``` for the other branches, you should pull changes periodically to keep up with team development.
+
+3. Cleanup the feature environment when no longer required.
+
+    Ensure any work have been pull-request merged into the master branch.
+
+    * Disconnect front-end
+
+        Amplify console -> YOUR_APP -> App settings -> General -> Branches
+
+        Disconnect the branch.
+
+    * Remove back-end
+
+        ```
+        amplify env checkout <any-other-env>
+        amplify env remove experiment
+        ```
+
+# 9. Create a predictions-based feature.
+
+Example based on [AWS Amplify predictions library example](https://docs.amplify.aws/lib/predictions/sample/q/platform/js)
+
+1. Setup the backend environment.
+    ```sh
+    git checkout -b prediction
+    amplify add predictions # Convert, Translate Text
+    amplify add predictions # Convert, Generate speech audio from text
+    amplify add predictions # Convert, Transcribe text from audio
+    amplify add predictions # Identify Text, select "Yes" to also identify documents.
+    amplify add predictions # Identify Entities
+    amplify add predictions # Convert, Interpret Text
+    amplify add predictions # Identify Labels
+    amplify push
+    # add the microphone module
+    yarn add microphone-stream
+    ```
+
+2. Update the app code with the example.
+    
+    See Example code in *src/components/Predict.js* , which is from the Amplify docs example.
+    
+    Fix region to where AIML services exist.
+    E.g. Speech to text is not available in ap-southeast-1 at the time of writing. 
+    Browser console debugging shows a name resolution failure. To fix
+    
+    Update regions for selective services in *src/aws-exports.js*, 
+    under JSON element *awsmobile.predictions* e.g.:
+    * Update *convert.transcription.region* to "ap-southeast-2"
+
+    Test locally. ```npm start```
+    The demo */predict* page shows demonstrations of the various prediction functions.
+    
+    > TODO: Identify Entities (Advanced) does not currently work
+
+
