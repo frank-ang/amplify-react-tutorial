@@ -13,10 +13,22 @@ Same prereqs as listed in the official docs. Briefly:
 
 ## 1. Initialize project
 
+> if you have cloned the git repo, do this instead:
+    ```sh
+    amplify init
+    amplify push
+    yarn install
+    ```
+    if not, instructions below:
+
 1. Create a React project
-    ```bash
-    YOUR_PROJECT_NAME=amplify02
+    ```sh
+    YOUR_PROJECT_NAME=amplifytutorial
+    
     npx create-react-app $YOUR_PROJECT_NAME
+    # or [ time: ~47s ]
+    yarn create react-app $YOUR_PROJECT_NAME 
+    
     cd $YOUR_PROJECT_NAME
     npm start
     ```
@@ -34,6 +46,8 @@ Same prereqs as listed in the official docs. Briefly:
 
     ```sh
     npm install aws-amplify @aws-amplify/ui-react
+    # or yarn, Done in 15.87s.
+    yarn add aws-amplify @aws-amplify/ui-react
     ```
 
     Add amplify libraries to the app, edit *src/index.js*
@@ -156,7 +170,7 @@ Refactor the app with navigation and react-router into sub-components.
 
 4. Enable Redirects for Single Page Web Apps (SPA) 
 
-    This step is necessary to enable the Amplify hosted website to support SPA frameworks such as ReactJS. This fixes "AccessDenied" errors during navigation. 
+    This step is necessary to enable the Amplify hosted website to support SPA frameworks such as ReactJS react-router-dom. This fixes "AccessDenied" errors during navigation. 
 
     *Amplify Console -> App settings -> Rewrites and redirects*
 
@@ -265,7 +279,7 @@ Example based on [AWS Amplify predictions library example](https://docs.amplify.
     amplify add predictions # Convert, Transcribe text from audio
     amplify add predictions # Identify Text, select "Yes" to also identify documents.
     amplify add predictions # Identify Entities
-    amplify add predictions # Convert, Interpret Text
+    amplify add predictions # Interpret, Interpret Text, All
     amplify add predictions # Identify Labels
     amplify push
     # add the microphone module
@@ -276,17 +290,47 @@ Example based on [AWS Amplify predictions library example](https://docs.amplify.
     
     See Example code in *src/components/Predict.js* , which is from the Amplify docs example.
     
-    Fix region to where AIML services exist.
-    E.g. Speech to text is not available in ap-southeast-1 at the time of writing. 
-    Browser console debugging shows a name resolution failure. To fix
-    
-    Update regions for selective services in *src/aws-exports.js*, 
-    under JSON element *awsmobile.predictions* e.g.:
-    * Update *convert.transcription.region* to "ap-southeast-2"
+    > Fix region to where AIML services exist.
+    E.g. Speech to text (Amazon Transcribe) is not available in ap-southeast-1 at the time of writing. To fix:
+    > Update RegionMapping. 
+    > Edit: *backend/predictions/transcription[ID]/transcription[ID]-template.json*, update RegionMapping accordingly, e.g. "ap-southeast-2"
 
     Test locally. ```npm start```
     The demo */predict* page shows demonstrations of the various prediction functions.
     
-    > TODO: Identify Entities (Advanced) does not currently work
+3. Update Identify Entities (Advanced) for self-trained face collection
 
+    >Update amplify predictions module "Identify" 
+    Workaround required due to S3 stack update error. Bug encountered inAmplify CLI 4.21.0.
+    
+    ```sh
+    amplify update predictions
+    ? Please select from one of the categories below Identify
+    ? Which identify resource would you like to update? identifyEntitiesd97bb669
+    ? Would you like use the default configuration? Advanced Configuration
+    ? Would you like to enable celebrity detection? Yes
+    ? Would you like to identify entities from a collection of images? Yes
+    ? How many entities would you like to identify? 50
+    ? Would you like to allow users to add images to this collection? Yes
+    ? Who should have access? Auth users only
+    # A new function is created. 
+    # Somehow add/removing the storage trigger function fixes a bug with cloudformation??
+    amplify storage update
+    ? Please select from one of the below mentioned services: Content (Images, audio, video, etc.)
+    ? Who should have access: Auth and guest users
+    ? What kind of access do you want for Authenticated users? create/update, read, delete
+    ? What kind of access do you want for Guest users? read
+    ? Select from the following options Update the Trigger
+    ? Select from the following options Choose an existing function from the project
+    ? Select from the following options RekognitionIndexFacesTrigger6394f3f5
+    ```
+    Next, in the AWS Console for Lambda, manually narrow down the Lambda function's S3 trigger paths.
 
+    >List faces in the collection
+    ```
+    COLLECTION_ID=`aws rekognition list-collections | jq -r  ".CollectionIds[]" | grep identify`
+
+    aws rekognition describe-collection --collection-id $COLLECTION_ID
+
+    aws rekognition list-faces --collection-id $COLLECTION_ID
+    ```

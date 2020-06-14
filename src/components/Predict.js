@@ -67,7 +67,7 @@ function EntityIdentification() {
         /**For using the Identify Entities advanced features, enable collection:true and comment out celebrityDetection
          * Then after you upload a face with PredictionsUpload you'll be able to run this again
          * and it will tell you if the photo you're testing is in that Collection or not and display it*/
-        //collection: true
+        // collection: true
         celebrityDetection: true
       }
     }).then(result => {
@@ -89,15 +89,16 @@ function EntityIdentification() {
         console.log({ name });
       })
       if (imageId) {
+        console.log({ imageId });
         Storage.get("", {
           customPrefix: {
-            public: imageId
+            public: imageId.replace(/_/g, " ") // ugly hack for space characters
           },
           level: "public",
         }).then(setSrc); // this should be better but it works
       }
       console.log({ entities });
-      setResponse(names);
+      setResponse(imageId);
     })
       .catch(err => console.log(err))
   }
@@ -416,6 +417,7 @@ function Predict() {
       <br/>
       Text Interpretation
       <TextInterpretation />
+      <br/>
     </div>
   );
 }

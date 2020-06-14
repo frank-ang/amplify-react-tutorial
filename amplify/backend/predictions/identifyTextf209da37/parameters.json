@@ -1,6 +1,6 @@
 {
-    "resourceName": "identifyTextbf39d631",
-    "identifyPolicyName": "identifyPolicybf39d631",
+    "resourceName": "identifyTextf209da37",
+    "identifyPolicyName": "identifyPolicyf209da37",
     "authRoleName": {
         "Ref": "AuthRoleName"
     },
@@ -11,6 +11,6 @@
     "adminGuestProtected": "DISALLOW",
     "identifyType": "identifyText",
     "identifyDoc": true,
-    "access": "auth",
+    "access": "authAndGuest",
     "format": "ALL"
 }
