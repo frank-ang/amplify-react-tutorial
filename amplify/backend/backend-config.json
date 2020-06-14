@@ -1,6 +1,67 @@
 {
+    "hosting": {
+        "amplifyhosting": {
+            "service": "amplifyhosting",
+            "providerPlugin": "awscloudformation",
+            "type": "manual"
+        }
+    },
+    "auth": {
+        "amplifydemos19a39f38": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "customAuth": false
+        }
+    },
+    "storage": {
+        "s3e6d329d1": {
+            "service": "S3",
+            "providerPlugin": "awscloudformation"
+        }
+    },
+    "predictions": {
+        "translateTextebe15d42": {
+            "providerPlugin": "awscloudformation",
+            "service": "Translate",
+            "convertType": "translateText"
+        },
+        "speechGenerator0c9190e8": {
+            "providerPlugin": "awscloudformation",
+            "service": "Polly",
+            "convertType": "speechGenerator"
+        },
+        "identifyTextf209da37": {
+            "providerPlugin": "awscloudformation",
+            "service": "RekognitionAndTextract",
+            "dependsOn": [],
+            "identifyType": "identifyText"
+        },
+        "identifyEntities74cd0b6d": {
+            "providerPlugin": "awscloudformation",
+            "service": "Rekognition",
+            "dependsOn": [],
+            "identifyType": "identifyEntities"
+        },
+        "interpretTextfbd0c980": {
+            "providerPlugin": "awscloudformation",
+            "service": "Comprehend",
+            "interpretType": "interpretText"
+        },
+        "identifyLabels47520be6": {
+            "providerPlugin": "awscloudformation",
+            "service": "Rekognition",
+            "dependsOn": [],
+            "identifyType": "identifyLabels"
+        },
+        "transcriptionc9715135": {
+            "providerPlugin": "awscloudformation",
+            "service": "Transcribe",
+            "convertType": "transcription"
+        }
+    },
     "api": {
-        "amplify02": {
+        "todos": {
             "service": "AppSync",
             "providerPlugin": "awscloudformation",
             "output": {
@@ -9,116 +70,12 @@
                     "defaultAuthentication": {
                         "authenticationType": "API_KEY",
                         "apiKeyConfig": {
-                            "description": "demo",
-                            "apiKeyExpirationDays": "7"
+                            "description": "todos-apikey",
+                            "apiKeyExpirationDays": "365"
                         }
                     }
                 }
             }
-        }
-    },
-    "auth": {
-        "amplify02bc4fbc99": {
-            "service": "Cognito",
-            "providerPlugin": "awscloudformation",
-            "dependsOn": [],
-            "customAuth": false
-        }
-    },
-    "hosting": {},
-    "storage": {
-        "s3ed3b9aa2": {
-            "service": "S3",
-            "providerPlugin": "awscloudformation",
-            "dependsOn": [
-                {
-                    "category": "function",
-                    "resourceName": "RekognitionIndexFacesTrigger6394f3f5",
-                    "attributes": [
-                        "Name",
-                        "Arn",
-                        "LambdaExecutionRole"
-                    ]
-                },
-                {
-                    "category": "function",
-                    "resourceName": "RekognitionIndexFacesTrigger6394f3f5",
-                    "attributes": [
-                        "Name",
-                        "Arn",
-                        "LambdaExecutionRole"
-                    ]
-                }
-            ]
-        }
-    },
-    "predictions": {
-        "identifyLabels0f3616c3": {
-            "providerPlugin": "awscloudformation",
-            "service": "Rekognition",
-            "dependsOn": [],
-            "identifyType": "identifyLabels"
-        },
-        "translateText3d0f7f1c": {
-            "providerPlugin": "awscloudformation",
-            "service": "Translate",
-            "convertType": "translateText"
-        },
-        "speechGenerator4a64b765": {
-            "providerPlugin": "awscloudformation",
-            "service": "Polly",
-            "convertType": "speechGenerator"
-        },
-        "transcription68c54e23": {
-            "providerPlugin": "awscloudformation",
-            "service": "Transcribe",
-            "convertType": "transcription"
-        },
-        "interpretText7f7c0c2e": {
-            "providerPlugin": "awscloudformation",
-            "service": "Comprehend",
-            "interpretType": "interpretText"
-        },
-        "identifyTextbf39d631": {
-            "providerPlugin": "awscloudformation",
-            "service": "RekognitionAndTextract",
-            "dependsOn": [],
-            "identifyType": "identifyText"
-        },
-        "identifyEntitiesd97bb669": {
-            "providerPlugin": "awscloudformation",
-            "service": "Rekognition",
-            "dependsOn": [
-                {
-                    "category": "function",
-                    "resourceName": "RekognitionIndexFacesTrigger6394f3f5",
-                    "attributes": [
-                        "Name",
-                        "Arn",
-                        "LambdaExecutionRole"
-                    ]
-                },
-                {
-                    "category": "storage",
-                    "resourceName": "s3ed3b9aa2",
-                    "attributes": [
-                        "BucketName"
-                    ]
-                }
-            ],
-            "identifyType": "identifyEntities"
-        }
-    },
-    "function": {
-        "S3Trigger2b9ff898": {
-            "service": "Lambda",
-            "providerPlugin": "awscloudformation",
-            "build": true
-        },
-        "RekognitionIndexFacesTrigger6394f3f5": {
-            "service": "Lambda",
-            "providerPlugin": "awscloudformation",
-            "build": true
         }
     }
 }

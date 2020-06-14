@@ -13,8 +13,16 @@ Same prereqs as listed in the official docs. Briefly:
 
 ## 1. Initialize project
 
+> if you have cloned the git repo, do this instead:
+    ```sh
+    amplify init
+    amplify push
+    yarn install
+    ```
+    if not, instructions below:
+
 1. Create a React project
-    ```bash
+    ```sh
     YOUR_PROJECT_NAME=amplifytutorial
     
     npx create-react-app $YOUR_PROJECT_NAME
@@ -162,7 +170,7 @@ Refactor the app with navigation and react-router into sub-components.
 
 4. Enable Redirects for Single Page Web Apps (SPA) 
 
-    This step is necessary to enable the Amplify hosted website to support SPA frameworks such as ReactJS. This fixes "AccessDenied" errors during navigation. 
+    This step is necessary to enable the Amplify hosted website to support SPA frameworks such as ReactJS react-router-dom. This fixes "AccessDenied" errors during navigation. 
 
     *Amplify Console -> App settings -> Rewrites and redirects*
 
