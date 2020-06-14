@@ -31,12 +31,12 @@
 				"FunctionName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"RekognitionIndexFacesTrigger2ad3ee20",
+						"RekognitionIndexFacesTrigger6394f3f5",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"RekognitionIndexFacesTrigger2ad3ee20",
+									"RekognitionIndexFacesTrigger6394f3f5",
 									"-",
 									{
 										"Ref": "env"
@@ -77,7 +77,7 @@
 				"Timeout": "900",
 				"Code": {
 					"S3Bucket": "amplify-amplify02-dev-223518-deployment",
-					"S3Key": "amplify-builds/RekognitionIndexFacesTrigger2ad3ee20-34643744734363574339-build.zip"
+					"S3Key": "amplify-builds/RekognitionIndexFacesTrigger6394f3f5-79447039595451732b33-build.zip"
 				}
 			}
 		},
@@ -87,12 +87,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"RekognitionIndexFacesTrigger2ad3ee20LambdaRole2ad3ee20",
+						"RekognitionIndexFacesTrigger6394f3f5LambdaRole6394f3f5",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"RekognitionIndexFacesTrigger2ad3ee20LambdaRole2ad3ee20",
+									"RekognitionIndexFacesTrigger6394f3f5LambdaRole6394f3f5",
 									"-",
 									{
 										"Ref": "env"

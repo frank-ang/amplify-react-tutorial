@@ -45,7 +45,8 @@ exports.handler = async event => {
       console.log('creation of folder');
       return;
     }
-    const externalImageId = decodeKey.replace(/\//g, '::');
+    const externalImageId = decodeKey.replace(/\//g, '::').replace(/\s/g, "_");
+
     console.log(decodeKey);
 
     if (event.Records[j].eventName === 'ObjectCreated:Put') {
@@ -63,7 +64,7 @@ exports.handler = async event => {
       const result = await rekognition.indexFaces(params1).promise();
 
       if (result.FaceRecords) {
-        console.log('Indexed image successfully');
+        console.log('Indexed image successfully: ' + externalImageId);
       } else {
         console.log('Request Failed');
         console.log(result);
