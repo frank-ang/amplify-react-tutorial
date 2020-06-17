@@ -6,6 +6,7 @@ import Home from './components/Home'
 import Todos from './components/Todos'
 import Upload from './components/Upload'
 import Predict from './components/Predict'
+import RegisterId from './components/RegisterId'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -33,6 +34,7 @@ const App = () => {
             <Route exact path="/todos" component={Todos} />
             <Route exact path="/upload" component={Upload} />
             <Route exact path="/predict" component={Predict} />
+            <Route exact path="/registerid" component={RegisterId} />
         </Switch>
       </Router>
       <Footer/>

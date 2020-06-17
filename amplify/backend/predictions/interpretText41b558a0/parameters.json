@@ -1,6 +1,6 @@
 {
-    "resourceName": "interpretTextfbd0c980",
-    "interpretPolicyName": "interpretPolicyfbd0c980",
+    "resourceName": "interpretText41b558a0",
+    "interpretPolicyName": "interpretPolicy41b558a0",
     "authRoleName": {
         "Ref": "AuthRoleName"
     },

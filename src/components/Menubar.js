@@ -29,6 +29,7 @@ class Menubar extends React.Component {
                         <NavDropdown title="More features" id="basic-nav-dropdown">
                             <NavDropdown.Item href="/upload">Upload to S3</NavDropdown.Item>
                             <NavDropdown.Item href="/predict">Prediction Examples</NavDropdown.Item>
+                            <NavDropdown.Item href="/registerid">Register ID</NavDropdown.Item>
                         </NavDropdown>
                         </Nav>
                         <Nav>

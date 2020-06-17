@@ -1,6 +1,6 @@
 {
-    "resourceName": "transcriptionc9715135",
-    "convertPolicyName": "transcriptionPolicyc9715135",
+    "resourceName": "transcription27bf8aaf",
+    "convertPolicyName": "transcriptionPolicy27bf8aaf",
     "authRoleName": {
         "Ref": "AuthRoleName"
     },

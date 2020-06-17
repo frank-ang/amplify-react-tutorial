@@ -168,7 +168,7 @@ Refactor the app with navigation and react-router into sub-components.
     amplify publish
     ```
 
-4. Enable Redirects for Single Page Web Apps (SPA) 
+4. Fix "Access Denied" by Enable Redirects for Single Page Web Apps (SPA) 
 
     This step is necessary to enable the Amplify hosted website to support SPA frameworks such as ReactJS react-router-dom. This fixes "AccessDenied" errors during navigation. 
 
