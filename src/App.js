@@ -6,7 +6,9 @@ import Home from './components/Home'
 import Todos from './components/Todos'
 import Upload from './components/Upload'
 import Predict from './components/Predict'
-import RegisterId from './components/RegisterId'
+import RegisterFace from './components/RegisterFace'
+import RegisterIdCard from './components/RegisterIdCard'
+import RegisterPerson from './components/RegisterPerson'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -14,6 +16,9 @@ import {
   BrowserRouter as Router,
   Switch,
 } from 'react-router-dom';
+import Amplify from "aws-amplify";
+import awsExports from "./aws-exports";
+Amplify.configure(awsExports);
 
 const Footer = () => {
   return (
@@ -34,7 +39,9 @@ const App = () => {
             <Route exact path="/todos" component={Todos} />
             <Route exact path="/upload" component={Upload} />
             <Route exact path="/predict" component={Predict} />
-            <Route exact path="/registerid" component={RegisterId} />
+            <Route exact path="/registerperson" component={RegisterPerson} />
+            <Route exact path="/registerface" component={RegisterFace} />
+            <Route exact path="/registeridcard" component={RegisterIdCard} />
         </Switch>
       </Router>
       <Footer/>

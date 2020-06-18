@@ -18,7 +18,8 @@ function TextIdentification() {
     setResponse('identifiying text...');
     const { target: { files } } = event;
     const [file,] = files || [];
-
+    console.log("file: ")
+    console.log(file);
     if (!file) {
       return;
     }
@@ -27,7 +28,7 @@ function TextIdentification() {
         source: {
           file,
         },
-        format: "PLAIN", // Available options "PLAIN", "FORM", "TABLE", "ALL"
+        format: "ALL", // Available options "PLAIN", "FORM", "TABLE", "ALL"
       }
     }).then(({text: { fullText }}) => {
       setResponse(fullText)
