@@ -29,14 +29,17 @@ function RegisterFace (props) {
     e.preventDefault();
     var blobData = dataURItoBlob(dataUri);
     // TODO get the person_name from a preceding process.
-    var person_name = "person_name_TODO.jpg";
-    Storage.put(person_name, blobData, {
+    var file_name = props.personName + ".jpg"; //"person_name_TODO.jpg";
+    Storage.put(file_name, blobData, {
         contentType: "image/jpeg",
         level: 'protected'
     })
-    .then(setUploadStatus("uploading..."))
-    .then(result => setUploadStatus("Uploaded. " + JSON.stringify(result.key)))
-    .catch(err => console.log(err));
+    .then(setUploadStatus("uploading to S3: " + file_name))
+    .then(result => {
+      setUploadStatus("Uploaded. " + JSON.stringify(result.key));
+      props.handleSelfie(result.key)
+    }).catch(err => console.log(err));
+    
   }
 
   function dataURItoBlob(dataURI) {
@@ -48,13 +51,12 @@ function RegisterFace (props) {
     return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
   }
 
-  const isFullscreen = false;
   return (
     <div>
       {
         (dataUri)
           ? <div style={{position: "relative", textAlign: "center", margin:"auto"}}>
-              <ImagePreview dataUri={dataUri} isFullscreen={isFullscreen}
+              <ImagePreview dataUri={dataUri} isFullscreen={false}
               />
               <button onClick={useFacePhoto}>Use Photo</button>
               <button onClick={resetFacePhoto}>Retake Photo</button>
@@ -62,7 +64,7 @@ function RegisterFace (props) {
               {uploadStatus}
             </div>
           : <Camera onTakePhotoAnimationDone = {handleTakePhotoAnimationDone}
-            isFullscreen={isFullscreen}
+            isFullscreen={false}
             />
       }
       <br/>

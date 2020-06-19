@@ -334,3 +334,8 @@ Example based on [AWS Amplify predictions library example](https://docs.amplify.
 
     aws rekognition list-faces --collection-id $COLLECTION_ID
     ```
+
+## 10. Customize styling for react-bootstrap
+
+Cosmetics.
+

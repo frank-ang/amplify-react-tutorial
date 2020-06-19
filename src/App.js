@@ -1,4 +1,7 @@
 /* src/App.js */
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './custom.css'
+import Container from 'react-bootstrap/Container';
 import React, { useEffect, useState } from 'react'
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import Menubar from './components/Menubar'
@@ -10,7 +13,6 @@ import RegisterFace from './components/RegisterFace'
 import RegisterIdCard from './components/RegisterIdCard'
 import RegisterPerson from './components/RegisterPerson'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   Route,
   BrowserRouter as Router,
@@ -33,17 +35,19 @@ const App = () => {
   return (
     <div>
       <Menubar/>
-      <Router>
-        <Switch>
-            <Route exact path="/" component={Home} />} />
-            <Route exact path="/todos" component={Todos} />
-            <Route exact path="/upload" component={Upload} />
-            <Route exact path="/predict" component={Predict} />
-            <Route exact path="/registerperson" component={RegisterPerson} />
-            <Route exact path="/registerface" component={RegisterFace} />
-            <Route exact path="/registeridcard" component={RegisterIdCard} />
-        </Switch>
-      </Router>
+      <Container>
+        <Router>
+          <Switch>
+              <Route exact path="/" component={Home} />} />
+              <Route exact path="/todos" component={Todos} />
+              <Route exact path="/upload" component={Upload} />
+              <Route exact path="/predict" component={Predict} />
+              <Route exact path="/registerperson" component={RegisterPerson} />
+              <Route exact path="/registerface" component={RegisterFace} />
+              <Route exact path="/registeridcard" component={RegisterIdCard} />
+          </Switch>
+        </Router>
+      </Container>
       <Footer/>
     </div>
   )
