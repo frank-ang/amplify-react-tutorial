@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { dataURItoFile } from './Util';
 
 /*
 Capture ID Card image from web cam and upload to S3.
@@ -56,21 +57,6 @@ function RegisterIdCard (props) {
       ...state,
       [evt.target.name]: value
     });
-  }  
-
-  // Converts a data URI string into a File object.
-  function dataURItoFile (dataURI) {
-    // Format of a base64-encoded URL:
-    // data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYAAAAEOCAIAAAAPH1dAAAAK
-    var BASE64_MARKER = ';base64,';
-    var mime = dataURI.split(BASE64_MARKER)[0].split(':')[1];
-    var filename = 'dataURI-file-' + (new Date()).getTime() + '.' + mime.split('/')[1];
-    var bytes = atob(dataURI.split(BASE64_MARKER)[1]);
-    var writer = new Uint8Array(new ArrayBuffer(bytes.length));
-    for (var i=0; i < bytes.length; i++) {
-      writer[i] = bytes.charCodeAt(i);
-    }
-    return new File([writer.buffer], filename, { type: mime });
   }
 
   function identifyText(dataUri) {
@@ -107,8 +93,7 @@ function RegisterIdCard (props) {
       {
         (dataUri)
           ? <div style={{position: "relative", textAlign: "center", margin:"auto"}}>
-              <ImagePreview dataUri={dataUri} isFullscreen={isFullscreen}
-              />
+              <ImagePreview dataUri={dataUri}/>
               <Button variant="outline-primary" onClick={usePhoto}>Use Photo</Button>
               <Button variant="outline-secondary" onClick={resetPhoto}>Retake Photo</Button>
             </div>

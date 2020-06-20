@@ -7,6 +7,14 @@
   width: 768px;
 }
 
+.demo-image-preview-s > img {
+  width: 480px;
+}
+
+.demo-image-preview-xs > img {
+  width: 300px;
+}
+
 @media(max-width:768px){
   .demo-image-preview > img {
     width: 100%;

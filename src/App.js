@@ -10,6 +10,7 @@ import Todos from './components/Todos'
 import Upload from './components/Upload'
 import Predict from './components/Predict'
 import RegisterPerson from './components/RegisterPerson'
+import RecognizePerson from './components/RecognizePerson'
 
 import {
   Route,
@@ -41,6 +42,7 @@ const App = () => {
               <Route exact path="/upload" component={Upload} />
               <Route exact path="/predict" component={Predict} />
               <Route exact path="/registerperson" component={RegisterPerson} />
+              <Route exact path="/recognizeperson" component={RecognizePerson} />
           </Switch>
         </Router>
       </Container>

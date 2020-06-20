@@ -341,9 +341,12 @@ Example based on [AWS Amplify predictions library example](https://docs.amplify.
     aws rekognition list-faces --collection-id $COLLECTION_ID
     ```
 
-    Test the face registration page.
+    To reset faces 
+    ```
+    FACEIDS=`aws rekognition list-faces --collection-id $COLLECTION_ID --query "Faces[].FaceId" --output text`
+    aws rekognition delete-faces --collection-id $COLLECTION_ID --face-ids $FACEIDS
+    ```
 
-    TODO: Test the face recognition page.
-
+    Test the face registration and Rekognition feature!
 
 

@@ -3,7 +3,7 @@ import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 import ImagePreview from './ImagePreview';
 import { Storage } from 'aws-amplify'
-
+import { dataURItoBlob } from './Util';
 /*
 Capture image from web cam and upload to S3.
 
@@ -44,22 +44,12 @@ function RegisterFace (props) {
     .catch(err => console.log(err));
   }
 
-  function dataURItoBlob(dataURI) {
-    var binary = atob(dataURI.split(',')[1]);
-    var array = [];
-    for(var i = 0; i < binary.length; i++) {
-        array.push(binary.charCodeAt(i));
-    }
-    return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
-  }
-
   return (
     <div>
       {
         (dataUri)
           ? <div style={{position: "relative", textAlign: "center", margin:"auto"}}>
-              <ImagePreview dataUri={dataUri} isFullscreen={false}
-              />
+              <ImagePreview dataUri={dataUri}/>
               <button onClick={useFacePhoto}>Use Photo</button>
               <button onClick={resetFacePhoto}>Retake Photo</button>
               <br/>

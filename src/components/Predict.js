@@ -93,7 +93,7 @@ function EntityIdentification() {
         console.log({ imageId });
         Storage.get("", {
           customPrefix: {
-            public: imageId.replace(/_/g, " ") // ugly hack for space characters
+            public: imageId
           },
           level: "public",
         }).then(setSrc); // this should be better but it works

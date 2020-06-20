@@ -30,6 +30,7 @@ class Menubar extends React.Component {
                             <NavDropdown.Item href="/upload">Upload to S3</NavDropdown.Item>
                             <NavDropdown.Item href="/predict">Prediction Examples</NavDropdown.Item>
                             <NavDropdown.Item href="/registerperson">Register Person</NavDropdown.Item>
+                            <NavDropdown.Item href="/recognizeperson">Recognize Person</NavDropdown.Item>
                         </NavDropdown>
                         </Nav>
                         <Nav>
