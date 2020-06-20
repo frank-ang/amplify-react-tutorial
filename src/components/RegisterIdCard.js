@@ -21,8 +21,6 @@ yarn add react-html5-camera-photo
 function RegisterIdCard (props) {
   const [dataUri, setDataUri] = useState('');
   const [response, setResponse] = useState('Enter particulars or scan ID card...')
-  //const [personName, setPersonName] = useState('');
-  //const [personEmail, setPersonEmail] = useState('');
   const [state, setState] = useState({
     personName: "",
     personEmail: ""

@@ -28,18 +28,20 @@ function RegisterFace (props) {
   function useFacePhoto(e) {
     e.preventDefault();
     var blobData = dataURItoBlob(dataUri);
-    // TODO get the person_name from a preceding process.
-    var file_name = props.personName + ".jpg"; //"person_name_TODO.jpg";
+    var file_name = props.personName.replace(/ /g, "_") + ".jpg";
+    setUploadStatus("uploading to S3: " + file_name)
     Storage.put(file_name, blobData, {
         contentType: "image/jpeg",
-        level: 'protected'
-    })
-    .then(setUploadStatus("uploading to S3: " + file_name))
+        level: 'protected',
+        customPrefix: {
+          protected: 'protected/predictions/index-faces/',
+        }
+    })  
     .then(result => {
       setUploadStatus("Uploaded. " + JSON.stringify(result.key));
       props.handleSelfie(result.key)
-    }).catch(err => console.log(err));
-    
+    })
+    .catch(err => console.log(err));
   }
 
   function dataURItoBlob(dataURI) {

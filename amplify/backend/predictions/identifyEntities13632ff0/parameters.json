@@ -7,12 +7,12 @@
     "unauthRoleName": {
         "Ref": "UnauthRoleName"
     },
-    "adminAuthProtected": "DISALLOW",
+    "adminAuthProtected": "ALLOW",
     "adminGuestProtected": "DISALLOW",
     "identifyType": "identifyEntities",
     "celebrityDetectionEnabled": true,
-    "adminTask": false,
+    "adminTask": true,
     "access": "auth",
-    "maxEntities": 0,
-    "folderPolicies": ""
+    "maxEntities": 50,
+    "folderPolicies": "app"
 }

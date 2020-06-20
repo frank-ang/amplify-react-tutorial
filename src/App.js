@@ -2,15 +2,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './custom.css'
 import Container from 'react-bootstrap/Container';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import Menubar from './components/Menubar'
 import Home from './components/Home'
 import Todos from './components/Todos'
 import Upload from './components/Upload'
 import Predict from './components/Predict'
-import RegisterFace from './components/RegisterFace'
-import RegisterIdCard from './components/RegisterIdCard'
 import RegisterPerson from './components/RegisterPerson'
 
 import {
@@ -43,8 +41,6 @@ const App = () => {
               <Route exact path="/upload" component={Upload} />
               <Route exact path="/predict" component={Predict} />
               <Route exact path="/registerperson" component={RegisterPerson} />
-              <Route exact path="/registerface" component={RegisterFace} />
-              <Route exact path="/registeridcard" component={RegisterIdCard} />
           </Switch>
         </Router>
       </Container>

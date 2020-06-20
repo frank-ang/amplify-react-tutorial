@@ -306,15 +306,20 @@ Example based on [AWS Amplify predictions library example](https://docs.amplify.
     ```sh
     amplify update predictions
     ? Please select from one of the categories below Identify
-    ? Which identify resource would you like to update? identifyEntitiesd97bb669
+    ? Which identify resource would you like to update? identifyEntitiesd1234567
     ? Would you like use the default configuration? Advanced Configuration
     ? Would you like to enable celebrity detection? Yes
     ? Would you like to identify entities from a collection of images? Yes
     ? How many entities would you like to identify? 50
     ? Would you like to allow users to add images to this collection? Yes
     ? Who should have access? Auth users only
-    # A new function is created. 
-    # Somehow add/removing the storage trigger function fixes a bug with cloudformation??
+    ```
+
+    A new function is created, in: 
+    *amplify/backend/function/RekognitionIndexFacesTrigger12345678/src/index.js*
+
+    > Workaround: somehow add/removing the storage trigger function fixes a bug with cloudformation.
+    ```sh
     amplify storage update
     ? Please select from one of the below mentioned services: Content (Images, audio, video, etc.)
     ? Who should have access: Auth and guest users
@@ -324,18 +329,21 @@ Example based on [AWS Amplify predictions library example](https://docs.amplify.
     ? Select from the following options Choose an existing function from the project
     ? Select from the following options RekognitionIndexFacesTrigger6394f3f5
     ```
-    Next, in the AWS Console for Lambda, manually narrow down the Lambda function's S3 trigger paths.
 
-    >List faces in the collection
+    After ```amplify push``` deployment, in the AWS Console for Lambda, manually narrow down the Lambda function's S3 trigger paths. 
+
+    Keep Enabled the 2 triggers for ObjectCreated and ObjectRemoved on S3 path *protected/predictions/index-faces/* , and Disable all other triggers.
+
+    To List faces in the collection
     ```
     COLLECTION_ID=`aws rekognition list-collections | jq -r  ".CollectionIds[]" | grep identify`
-
     aws rekognition describe-collection --collection-id $COLLECTION_ID
-
     aws rekognition list-faces --collection-id $COLLECTION_ID
     ```
 
-## 10. Customize styling for react-bootstrap
+    Test the face registration page.
 
-Cosmetics.
+    TODO: Test the face recognition page.
+
+
 
