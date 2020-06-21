@@ -18,7 +18,8 @@ function TextIdentification() {
     setResponse('identifiying text...');
     const { target: { files } } = event;
     const [file,] = files || [];
-
+    console.log("file: ")
+    console.log(file);
     if (!file) {
       return;
     }
@@ -27,7 +28,7 @@ function TextIdentification() {
         source: {
           file,
         },
-        format: "PLAIN", // Available options "PLAIN", "FORM", "TABLE", "ALL"
+        format: "ALL", // Available options "PLAIN", "FORM", "TABLE", "ALL"
       }
     }).then(({text: { fullText }}) => {
       setResponse(fullText)
@@ -67,8 +68,8 @@ function EntityIdentification() {
         /**For using the Identify Entities advanced features, enable collection:true and comment out celebrityDetection
          * Then after you upload a face with PredictionsUpload you'll be able to run this again
          * and it will tell you if the photo you're testing is in that Collection or not and display it*/
-        // collection: true
-        celebrityDetection: true
+        collection: true
+        // celebrityDetection: true
       }
     }).then(result => {
       console.log(result);
@@ -92,7 +93,7 @@ function EntityIdentification() {
         console.log({ imageId });
         Storage.get("", {
           customPrefix: {
-            public: imageId.replace(/_/g, " ") // ugly hack for space characters
+            public: imageId
           },
           level: "public",
         }).then(setSrc); // this should be better but it works

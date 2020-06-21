@@ -1,18 +1,18 @@
 {
-    "resourceName": "identifyEntities74cd0b6d",
-    "identifyPolicyName": "identifyPolicy74cd0b6d",
+    "resourceName": "identifyEntities13632ff0",
+    "identifyPolicyName": "identifyPolicy13632ff0",
     "authRoleName": {
         "Ref": "AuthRoleName"
     },
     "unauthRoleName": {
         "Ref": "UnauthRoleName"
     },
-    "adminAuthProtected": "DISALLOW",
+    "adminAuthProtected": "ALLOW",
     "adminGuestProtected": "DISALLOW",
     "identifyType": "identifyEntities",
-    "access": "auth",
     "celebrityDetectionEnabled": true,
-    "maxEntities": 0,
-    "adminTask": false,
-    "folderPolicies": ""
+    "adminTask": true,
+    "access": "auth",
+    "maxEntities": 50,
+    "folderPolicies": "app"
 }
