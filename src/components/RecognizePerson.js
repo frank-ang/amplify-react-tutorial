@@ -6,8 +6,6 @@ import 'react-html5-camera-photo/build/css/index.css';
 import ImagePreview from './ImagePreview';
 import { Storage, Predictions } from 'aws-amplify';
 import { dataURItoFile } from './Util';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 function RecognizePerson (props) {
     const [dataUri, setDataUri] = useState('');
@@ -28,10 +26,8 @@ function RecognizePerson (props) {
         }).then(result => {
             console.log(result);
             const entities = result.entities;
-            let imageId = ""
-            let names = ""
             entities.forEach(({ boundingBox, metadata: { name = "", externalImageId = "" } }) => {
-                imageId = externalImageId;
+                let imageId = externalImageId;
                 console.log({ name });
                 if (imageId) {
                     console.log({ imageId });
@@ -52,8 +48,6 @@ function RecognizePerson (props) {
 
     return (
         <CardGroup class="m-1">
-            <Row>
-            <Col>
             <Card>
                 <Card.Header>Identity Verification with Image Recognition</Card.Header>
                 <Card.Body>
@@ -72,10 +66,8 @@ function RecognizePerson (props) {
                     }
                 </Card.Body>
             </Card>
-            </Col>
             {
                 dataUri && 
-                <Col>
                 <Card>
                     <Card.Header>Amazon Rekognition Result</Card.Header>
                     <Card.Body>
@@ -83,9 +75,7 @@ function RecognizePerson (props) {
                         <p>{response}</p>
                     </Card.Body>
                 </Card>
-                </Col>
             }
-            </Row>
         </CardGroup>
     );
 }
