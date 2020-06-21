@@ -41,6 +41,8 @@ function RecognizePerson (props) {
                     .then(setResponse("Matched imageId: " + imageId));
                 }
             });
+            if (src === "")
+                setResponse("No match found.");
             console.log({ entities });
         })
         .catch(err => console.log(err))
