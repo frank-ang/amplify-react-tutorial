@@ -68,8 +68,8 @@ function EntityIdentification() {
         /**For using the Identify Entities advanced features, enable collection:true and comment out celebrityDetection
          * Then after you upload a face with PredictionsUpload you'll be able to run this again
          * and it will tell you if the photo you're testing is in that Collection or not and display it*/
-        collection: true
-        // celebrityDetection: true
+        //collection: true
+        celebrityDetection: true
       }
     }).then(result => {
       console.log(result);

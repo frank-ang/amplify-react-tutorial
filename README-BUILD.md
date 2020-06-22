@@ -278,10 +278,9 @@ Example based on [AWS Amplify predictions library example](https://docs.amplify.
     
     See Example code in *src/components/Predict.js* , which is from the Amplify docs example.
     
-    > Fix region to where AIML services exist.
-    E.g. Speech to text (Amazon Transcribe) is not available in ap-southeast-1 at the time of writing. To fix:
-    > Update RegionMapping. 
-    > Edit: *backend/predictions/transcription[ID]/transcription[ID]-template.json*, update RegionMapping accordingly, e.g. "ap-southeast-2"
+    Depending on the availability of particular AI/ML services in the AWS Region you are deploying, you may need to update the region. E.g. Amazon Transcribe (Speech to text) is not available in ap-southeast-1 at the time of writing. To fix, we point to ap-southeast-2 endpoint instead:
+        
+    Edit: *amplify/backend/predictions/transcription[ID]/transcription[ID]-template.json*, update RegionMapping accordingly, e.g. "ap-southeast-2"
 
     Test locally. ```npm start```
     The demo */predict* page shows demonstrations of the various prediction functions.
