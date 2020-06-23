@@ -337,3 +337,70 @@ Example based on [AWS Amplify predictions library example](https://docs.amplify.
     Test the face registration and Rekognition feature!
 
 
+# 10. Detect Leaf disease with an Amazon Rekognition Custom Labels model.
+
+Create an Amazon Rekognition Custom Labels model. E.g. [Detect Rice Leaf Disease](https://github.com/frank-ang/rice-disease-rekognition) for for Agritech use-cases.
+
+Create a REST API that calls a NodeJS function.
+
+```sh
+amplify add api
+? Please select from one of the below mentioned services: REST
+? Provide a friendly name for your resource to be used as a label for this category in the project: detect
+? Provide a path (e.g., /book/{isbn}): /rice
+? Choose a Lambda source Create a new Lambda function
+? Provide a friendly name for your resource to be used as a label for this category in the project: DetectRiceLabe
+ls
+? Provide the AWS Lambda function name: DetectRiceLabels
+? Choose the function runtime that you want to use: NodeJS
+? Choose the function template that you want to use: Hello World
+? Do you want to access other resources created in this project from your Lambda function? Yes
+? Select the category storage
+? Storage has 2 resources in this project. Select the one you would like your Lambda to access s3ac8d3362
+? Select the operations you want to permit for s3ac8d3362 read
+
+You can access the following resource attributes as environment variables from your Lambda function
+	ENV
+	REGION
+	STORAGE_S3AC8D3362_BUCKETNAME
+? Do you want to invoke this function on a recurring schedule? No
+? Do you want to edit the local lambda function now? Yes
+Please edit the file in your editor: /Users/frankang/lab/Playground/amplify-react-tutorial/amplify/backend/function/DetectRiceLabels/src/index.js
+? Press enter to continue 
+Succesfully added the Lambda function locally
+? Restrict API access Yes
+? Who should have access? Authenticated users only
+? What kind of access do you want for Authenticated users? read, update
+? Do you want to add another path? No
+Successfully added resource detect locally
+```
+It creates 1 API *detect* that calls 1 function *DetectRiceLabels*
+
+Test the function
+```
+amplify mock function DetectRiceLabels
+```
+
+> TODO:
+> Update the function code. This enables CORS and implements the detection logic.
+ 
+Replace the function code with the code provided at *TODO*.
+On the AWS console, update the Lambda function Execution role:
+   *Lambda->DetectRiceLabels function -> Permissions Tab -> Execution Role (opens IAM console)*
+Allow the IAM Action: "rekognition:DetectCustomLabels".
+Allow S3: "s3:PutObject",
+          "s3:GetObject",
+          "s3:ListBucket"
+
+Call the API from a page.
+
+
+
+
+
+# TODO:
+
+* Bounding box in image viewer.
+* Amplify Analytics
+
+

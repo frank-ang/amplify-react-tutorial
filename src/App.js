@@ -11,6 +11,7 @@ import Upload from './components/Upload'
 import Predict from './components/Predict'
 import RegisterPerson from './components/RegisterPerson'
 import RecognizePerson from './components/RecognizePerson'
+import DetectRiceDisease from './components/DetectRiceDisease'
 
 import {
   Route,
@@ -23,7 +24,7 @@ Amplify.configure(awsExports);
 
 const Footer = () => {
   return (
-      <footer class="fixed-bottom footer text-center text-muted bg-dark">
+      <footer className="fixed-bottom footer text-center text-muted bg-dark">
         © 2020 Amazon Web Services ASEAN. Dedicated to Devs!
       </footer>
   )
@@ -43,6 +44,7 @@ const App = () => {
               <Route exact path="/predict" component={Predict} />
               <Route exact path="/registerperson" component={RegisterPerson} />
               <Route exact path="/recognizeperson" component={RecognizePerson} />
+              <Route exact path="/detectricedisease" component={DetectRiceDisease} />
           </Switch>
         </Router>
       </Container>

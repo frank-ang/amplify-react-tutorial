@@ -1,46 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Nav, NavDropdown, Navbar } from 'react-bootstrap';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
 
-class Menubar extends React.Component {
+function Menubar() {
+    const [username, setUsername] = useState("")
+    Auth.currentAuthenticatedUser({bypassCache: false})
+    .then(user => { 
+        setUsername(user.username);
+    })
+    .catch(err => console.log(err));
+    return (
+        <div>
+            <Navbar bg="dark" variant="dark" expand="lg" sticky="top" fixed="top" >
+                <Navbar.Brand href="#home">Amplify it!</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/todos">Todos</Nav.Link>
+                    <NavDropdown title="More features" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="/predict">Prediction Examples</NavDropdown.Item>
+                        <NavDropdown.Item href="/registerperson">Register Person</NavDropdown.Item>
+                        <NavDropdown.Item href="/recognizeperson">Recognize Person</NavDropdown.Item>
+                        <NavDropdown.Item href="/detectricedisease">Detect Rice Disease</NavDropdown.Item>
+                        <NavDropdown.Item href="/upload">Upload to S3</NavDropdown.Item>
 
-    constructor(props) {
-        super(props);
-        this.state = { username: "" };
-        Auth.currentAuthenticatedUser({bypassCache: false})
-            .then(user => { 
-                console.log(user);
-                this.setState({ "username": user.username});
-            })
-            .catch(err => console.log(err));
-    }
+                    </NavDropdown>
+                    </Nav>
+                    <Nav>
+                        <Nav.Item><Navbar.Text>Hello, {username} &nbsp;&nbsp;</Navbar.Text></Nav.Item>
+                        <Nav.Item><AmplifySignOut/></Nav.Item>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+        </div>
+    );
 
-    render () {
-        return (
-            <div>
-                <Navbar bg="dark" variant="dark" expand="lg" sticky="top" fixed="top" >
-                    <Navbar.Brand href="#home">Amplify it!</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/todos">Todos</Nav.Link>
-                        <NavDropdown title="More features" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="/upload">Upload to S3</NavDropdown.Item>
-                            <NavDropdown.Item href="/predict">Prediction Examples</NavDropdown.Item>
-                            <NavDropdown.Item href="/registerperson">Register Person</NavDropdown.Item>
-                            <NavDropdown.Item href="/recognizeperson">Recognize Person</NavDropdown.Item>
-                        </NavDropdown>
-                        </Nav>
-                        <Nav>
-                            <Nav.Item><Navbar.Text>Hello, {this.state.username} &nbsp;&nbsp;</Navbar.Text></Nav.Item>
-                            <Nav.Item><AmplifySignOut/></Nav.Item>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
-            </div>
-        );
-    }
 }
 export default Menubar;

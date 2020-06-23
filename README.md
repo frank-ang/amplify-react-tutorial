@@ -142,4 +142,3 @@ In the AWS Console for Lambda, manually narrow down the Lambda function's S3 tri
 
 Test the face registration and Rekognition feature!
 
-
