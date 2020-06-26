@@ -339,9 +339,9 @@ Example based on [AWS Amplify predictions library example](https://docs.amplify.
 
 # 10. Detect Leaf disease with an Amazon Rekognition Custom Labels model.
 
-Create an Amazon Rekognition Custom Labels model. E.g. [Detect Rice Leaf Disease](https://github.com/frank-ang/rice-disease-rekognition) for for Agritech use-cases.
+1. Create an Amazon Rekognition Custom Labels model. E.g. See my [Detect Rice Leaf Disease exmaple](https://github.com/frank-ang/rice-disease-rekognition) for an Agritech example to detect disease in rice crop through visual rice leaf image. 
 
-Create a REST API that calls a NodeJS function.
+2. Create a REST API to call a NodeJS function, which will call your Amazon Rekognition Custom Labels model.
 
 ```sh
 amplify add api
@@ -374,29 +374,32 @@ Succesfully added the Lambda function locally
 ? Do you want to add another path? No
 Successfully added resource detect locally
 ```
-It creates 1 API *detect* that calls 1 function *DetectRiceLabels*
+It creates an API ```detect``` that calls a NodeJS Lambda Function ```DetectRiceLabels```. 
 
-Test the function
+Test the dummy function
 ```
 amplify mock function DetectRiceLabels
 ```
 
-> TODO:
-> Update the function code. This enables CORS and implements the detection logic.
- 
-Replace the function code with the code provided at *TODO*.
+Implement the code
+This function should make a cross-region call to the Amazon Rekognition Custom Labels model
+Replace the function code with the code provided at [./src/lambda/lambda.detect.rice.index.js](./src/lambda/lambda.detect.rice.index.js) and update the hardcoded values in it to your environment.
+
+Grant the Lambda function permissions to: 
+* copy the image for detection, from the source bucket into, copy cross-region into the bucket where the Rekognition model lives.
+* call the Rekognition custom labels model.
+
 On the AWS console, update the Lambda function Execution role:
-   *Lambda->DetectRiceLabels function -> Permissions Tab -> Execution Role (opens IAM console)*
-Allow the IAM Action: "rekognition:DetectCustomLabels".
-Allow S3: "s3:PutObject",
-          "s3:GetObject",
-          "s3:ListBucket"
 
-Call the API from a page.
+**Lambda->DetectRiceLabels function -> Permissions Tab -> Execution Role (opens IAM console)**
 
+Allow these actions on the Role IAM Action: 
+* "rekognition:DetectCustomLabels",
+* "s3:PutObject",
+* "s3:GetObject",
+* "s3:ListBucket"
 
-
-
+Test by opening the browser page to the Detect Rice Disease page. Upload a sample rice leaf image. A successful call should display the disease detection results.
 
 # TODO:
 

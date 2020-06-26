@@ -13,19 +13,18 @@ function Menubar() {
     return (
         <div>
             <Navbar bg="dark" variant="dark" expand="lg" sticky="top" fixed="top" >
-                <Navbar.Brand href="#home">Amplify it!</Navbar.Brand>
+                <Navbar.Brand href="/">Amplify it!</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/todos">Todos</Nav.Link>
-                    <NavDropdown title="More features" id="basic-nav-dropdown">
+                    <NavDropdown title="Features" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/predict">Prediction Examples</NavDropdown.Item>
                         <NavDropdown.Item href="/registerperson">Register Person</NavDropdown.Item>
                         <NavDropdown.Item href="/recognizeperson">Recognize Person</NavDropdown.Item>
                         <NavDropdown.Item href="/detectricedisease">Detect Rice Disease</NavDropdown.Item>
-                        <NavDropdown.Item href="/upload">Upload to S3</NavDropdown.Item>
-
+                        <NavDropdown.Item href="/todos">Todos</NavDropdown.Item>
+                        <NavDropdown.Item href="/upload">Simple Upload</NavDropdown.Item>
                     </NavDropdown>
                     </Nav>
                     <Nav>

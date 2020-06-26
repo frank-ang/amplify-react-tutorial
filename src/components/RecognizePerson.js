@@ -3,8 +3,8 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
-import ImagePreview from './ImagePreview';
 import { Storage, Predictions } from 'aws-amplify';
+import ImagePreview from './ImagePreview';
 import { dataURItoFile } from './Util';
 
 function RecognizePerson (props) {
@@ -26,20 +26,23 @@ function RecognizePerson (props) {
         }).then(result => {
             console.log(result);
             const entities = result.entities;
-            entities.forEach(({ boundingBox, metadata: { name = "", externalImageId = "" } }) => {
-                let imageId = externalImageId;
-                console.log({ name });
+            entities.forEach(entity => {
+                console.log(entity)
+                let imageId = entity.metadata.externalImageId;
                 if (imageId) {
                     console.log({ imageId });
                     Storage.get("", {
                         customPrefix: {
-                        public: imageId
+                            public: imageId
                         },
                         level: "public",
                     })
-                    .then(setSrc)
-                    .then(setResponse("Matched imageId: " + imageId));
-                }
+                    .then(storageResult => {
+                        console.log({storageResult});
+                        setSrc(storageResult);
+                        setResponse("Matched imageId: " + imageId + "\\n URL: " + storageResult)
+                    });
+               }
             });
             if (src === "")
                 setResponse("No match found.");
@@ -49,7 +52,7 @@ function RecognizePerson (props) {
     }
 
     return (
-        <CardGroup class="m-1">
+        <CardGroup className="m-1">
             <Card>
                 <Card.Header>Identity Verification with Image Recognition</Card.Header>
                 <Card.Body>
@@ -74,7 +77,7 @@ function RecognizePerson (props) {
                     <Card.Header>Amazon Rekognition Result</Card.Header>
                     <Card.Body>
                         { src && <ImagePreview dataUri={src} size="XS"/> }
-                        <p>{response}</p>
+                        <pre>{response}</pre>
                     </Card.Body>
                 </Card>
             }
