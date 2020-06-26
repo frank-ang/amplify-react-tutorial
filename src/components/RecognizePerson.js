@@ -40,7 +40,7 @@ function RecognizePerson (props) {
                     .then(storageResult => {
                         console.log({storageResult});
                         setSrc(storageResult);
-                        setResponse("Matched imageId: " + imageId + "\\n URL: " + storageResult)
+                        setResponse("Matched imageId: " + imageId)
                     });
                }
             });

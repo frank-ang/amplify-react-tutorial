@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import { Auth, API, Storage } from 'aws-amplify'
+import ImagePreview from './ImagePreview';
 
 function DetectRiceDisease (props) {
     const [response, setResponse] = useState("")
@@ -22,7 +23,7 @@ function DetectRiceDisease (props) {
         })
         .then (result => {
             console.log("uploaded key: " + result.key);
-            setResponse("Uploaded: " + result.key + ". Now running detection on image...")
+            setResponse("Running detection on image...")
 
             var s3path = "/protected/" + userId + "/" + result.key;
             detectRiceDisease(s3path).then(detectResult => {
@@ -47,11 +48,6 @@ function DetectRiceDisease (props) {
         return API.get(apiName, apiPath, apiRequestConfig);
     }
 
-    const imgStyle = { 
-        width: "400px",
-        height: "auto"
-    }
-
     return (
         <CardGroup className="m-1">
             <Card>
@@ -62,7 +58,7 @@ function DetectRiceDisease (props) {
                         onChange={(e) => upload(e.target.files[0])}
                     />
                     <br/>
-                    <img src={file} style={imgStyle}/>
+                    <ImagePreview dataUri={file}/>
                     <br/>
                     <pre>{response}</pre>
                 </Card.Body>
