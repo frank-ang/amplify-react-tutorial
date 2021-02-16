@@ -21,10 +21,11 @@ function Menubar() {
                     <NavDropdown title="Features" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/predict">Prediction Examples</NavDropdown.Item>
                         <NavDropdown.Item href="/registerperson">Register Person</NavDropdown.Item>
-                        <NavDropdown.Item href="/recognizeperson">Recognize Person</NavDropdown.Item>
+                        <NavDropdown.Item href="/recogni=zeperson">Recognize Person</NavDropdown.Item>
                         <NavDropdown.Item href="/detectricedisease">Detect Rice Disease</NavDropdown.Item>
                         <NavDropdown.Item href="/todos">Todos</NavDropdown.Item>
                         <NavDropdown.Item href="/upload">Simple Upload</NavDropdown.Item>
+                        <NavDropdown.Item href="/fortune">Fortune</NavDropdown.Item>
                     </NavDropdown>
                     </Nav>
                     <Nav>

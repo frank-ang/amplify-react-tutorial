@@ -19,7 +19,7 @@ function HomeCarousel() {
             <Carousel.Item>
                 <img
                 className="d-block w-100"
-                src="https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                src="https://images.pexels.com/photos/4226262/pexels-photo-4226262.jpeg?auto=compress&cs=tinysrgb&h=853&w=1280"
                 alt=" slide"
                 />
                 <Carousel.Caption>
@@ -31,7 +31,7 @@ function HomeCarousel() {
             <Carousel.Item>
                 <img
                 className="d-block w-100"
-                src="https://images.pexels.com/photos/318540/pexels-photo-318540.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                src="https://images.pexels.com/photos/4062563/pexels-photo-4062563.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
                 alt=" slide"
                 />
                 <Carousel.Caption>
